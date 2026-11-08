@@ -6,7 +6,7 @@
 // Больше в этом файле ничего не трогаем — вся работа будет
 // внутри App и его дочерних компонентов.
 import { createRoot } from "react-dom/client";
-import "./index.css";
+import "./styles.css";
 import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(<App />);
