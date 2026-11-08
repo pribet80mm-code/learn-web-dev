@@ -1,6 +1,4 @@
-/* Стили страницы.
-   Пишите здесь. */
-
+/* --- ОБЩИЕ СТИЛИ --- */
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +6,363 @@
 }
 
 body {
+  font-family: 'Noto Sans', sans-serif; /* Твой шрифт */
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  font-family: sans-serif;
+}
+
+/* --- ШАПКА --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 70px;
+  background-color: #111111;
+  border-bottom: 1px solid #333;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Размер логотипа подгоняем под шапку */
+.logo-img {
+  height: 32px; 
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #cc0000;
+}
+
+/* --- ИНДИКАТОР ШАГОВ --- */
+.steps-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 40px;
+  background-color: #222222;
+  border-bottom: 1px solid #333;
+  gap: 16px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  color: #111;
+}
+
+.circle.white { background-color: #fff; }
+.circle.red { background-color: #cc0000; color: #fff; }
+.circle.gray { background-color: #555; color: #fff; }
+
+.step-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.step-label.active { color: #fff; }
+.step-label.dim { color: #888; }
+
+.step-line {
+  width: 60px;
+  height: 1px;
+  background-color: #444;
+  margin-left: 10px;
+}
+
+/* --- ОСНОВНОЙ КОНТЕНТ (Центрирование) --- */
+.main-content {
+  flex: 1;
+  padding: 60px 20px;
+  max-width: 1040px; /* Ограничиваем ширину контента */
+  margin: 0 auto;    /* Центрируем по экрану */
+  width: 100%;
+}
+
+.title-area {
+  margin-bottom: 32px;
+}
+
+.title-area h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.title-area p {
+  font-size: 14px;
+  color: #888;
+}
+
+/* --- СЕТКА (Календарь и Время) --- */
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.calendar-block, .time-block {
+  background-color: #222222;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.block-header h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.calendar-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.arrow-btn {
+  background: #fff;
+  color: #111;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.arrow-btn:hover {
+  background: #ddd;
+}
+
+/* --- КАЛЕНДАРЬ --- */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.day-empty {
+  height: 44px; /* Пустые ячейки для смещения */
+}
+
+.day-btn {
+  background-color: #fff;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  height: 44px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.day-btn:hover {
+  background-color: #ddd;
+}
+
+.day-btn.active {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+/* --- ВРЕМЯ --- */
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.time-btn {
+  background-color: #fff;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.time-btn:hover {
+  background-color: #ddd;
+}
+
+/* Состояние "Занято" (заблокировано) */
+.time-btn.disabled {
+  background-color: #888;
+  color: #444;
+  cursor: not-allowed; /* Крестик/запрещающий курсор */
+  text-decoration: line-through; /* Можно добавить, чтобы было понятнее, что занято */
+}
+
+.time-btn.active {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+/* --- БЛОК ИТОГА И КНОПКА --- */
+.action-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333;
+  padding-top: 32px;
+}
+
+.summary {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.summary-label {
+  color: #888;
+}
+
+.summary-value {
+  font-weight: 700;
+}
+
+.next-btn {
+  background-color: #cc0000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 16px 48px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.next-btn:hover {
+  background-color: #a30000;
+  box-shadow: 0 0 15px rgba(204, 0, 0, 0.4);
+}
+
+/* --- ПОДВАЛ --- */
+.footer {
+  background-color: #111111;
+  padding: 60px 20px 40px;
+  border-top: 1px solid #333;
+}
+
+.footer-container {
+  max-width: 1040px; /* Подвал тоже центрируем */
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.footer-brand .logo-img {
+  height: 40px;
+}
+
+.footer-col h3 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.footer-col a {
+  display: block;
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 12px;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: #fff;
+}
+
+.links-row {
+  display: flex;
+  gap: 24px;
+}
+
+.links-inner a {
+  margin-bottom: 12px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 12px;
+  padding-top: 24px;
+  border-top: 1px solid #333;
+}
+
+.footer-bottom a {
+  color: #666;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: #fff;
 }

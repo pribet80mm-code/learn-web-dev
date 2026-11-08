@@ -1,26 +1,199 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Выбор даты и времени</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!--
-      ЗАДАНИЕ
-      ========
-      Сверстать страницу выбора даты и времени по своему макету.
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Запись — STEEL Barber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Подключаем Noto Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page">
+    
+    <!-- ШАПКА -->
+    <header class="header">
+      <div class="logo">
+        <!-- Вставили твой SVG -->
+        <img src="./images/Group 1.svg" alt="STEEL Logo" class="logo-img">
+      </div>
+      <nav class="nav-links">
+        <a href="#">Услуги</a>
+        <a href="#">Галерея</a>
+        <a href="#">Команда</a>
+        <a href="#">Отзывы</a>
+        <a href="#">Контакты</a>
+      </nav>
+    </header>
 
-      Пока это только вёрстка. Никакого JavaScript — ни кликов,
-      ни переходов, ни выбора дня. Всё статично.
-
-      Стили пишите в styles.css. Разметку — здесь.
-    -->
-
-    <div class="page">
-      <!-- Начните отсюда. Разметьте шапку, основную область
-           с календарём и слотами, подвал. -->
+    <!-- ИНДИКАТОР ШАГОВ -->
+    <div class="steps-container">
+      <div class="step">
+        <div class="circle white"><span>1</span></div>
+        <span class="step-label">Мастер</span>
+        <div class="step-line"></div>
+      </div>
+      <div class="step">
+        <div class="circle white"><span>2</span></div>
+        <span class="step-label">Услуга</span>
+        <div class="step-line"></div>
+      </div>
+      <div class="step">
+        <div class="circle red"><span>3</span></div>
+        <span class="step-label active">Дата</span>
+        <div class="step-line"></div>
+      </div>
+      <div class="step">
+        <div class="circle gray"><span>4</span></div>
+        <span class="step-label dim">Контакт</span>
+        <div class="step-line"></div>
+      </div>
+      <div class="step">
+        <div class="circle gray"><span>5</span></div>
+        <span class="step-label dim">Подтверждение</span>
+      </div>
     </div>
-  </body>
+
+    <!-- ОСНОВНОЙ БЛОК -->
+    <main class="main-content">
+      <div class="title-area">
+        <h1>ВЫБЕРИТЕ ВРЕМЯ</h1>
+        <p>Доступное время для каждого</p>
+      </div>
+
+      <div class="booking-layout">
+        <!-- ЛЕВАЯ КОЛОНКА: КАЛЕНДАРЬ -->
+        <section class="calendar-block">
+          <div class="block-header">
+            <h2>Июнь 2025</h2>
+            <div class="calendar-arrows">
+              <button class="arrow-btn">&lt;</button>
+              <button class="arrow-btn">&gt;</button>
+            </div>
+          </div>
+          
+          <div class="weekdays">
+            <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+          </div>
+          
+          <div class="days-grid">
+            <!-- Пустые ячейки для выравнивания (т.к. 1 июня - воскресенье) -->
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            <div class="day-empty"></div>
+            
+            <!-- Текущий месяц -->
+            <button class="day-btn active">1</button>
+            <button class="day-btn">2</button>
+            <button class="day-btn">3</button>
+            <button class="day-btn">4</button>
+            <button class="day-btn">5</button>
+            <button class="day-btn">6</button>
+            <button class="day-btn">7</button>
+            <button class="day-btn">8</button>
+            <button class="day-btn">9</button>
+            <button class="day-btn">10</button>
+            <button class="day-btn">11</button>
+            <button class="day-btn">12</button>
+            <button class="day-btn">13</button>
+            <button class="day-btn">14</button>
+            <button class="day-btn">15</button>
+            <button class="day-btn">16</button>
+            <button class="day-btn">17</button>
+            <button class="day-btn">18</button>
+            <button class="day-btn">19</button>
+            <button class="day-btn">20</button>
+            <button class="day-btn">21</button>
+            <button class="day-btn">22</button>
+            <button class="day-btn">23</button>
+            <button class="day-btn">24</button>
+            <button class="day-btn">25</button>
+            <button class="day-btn">26</button>
+            <button class="day-btn">27</button>
+            <button class="day-btn">28</button>
+            <button class="day-btn">29</button>
+            <button class="day-btn">30</button>
+          </div>
+        </section>
+
+        <!-- ПРАВАЯ КОЛОНКА: ВРЕМЯ -->
+        <section class="time-block">
+          <div class="block-header">
+            <h2>Доступное время</h2>
+          </div>
+          
+          <div class="time-grid">
+            <button class="time-btn">10:00</button>
+            <button class="time-btn disabled">11:00</button>
+            <button class="time-btn active">12:00</button>
+            <button class="time-btn disabled">13:00</button>
+            <button class="time-btn">14:00</button>
+            <button class="time-btn">15:00</button>
+            <button class="time-btn">16:00</button>
+            <button class="time-btn">17:00</button>
+            <button class="time-btn">18:00</button>
+            <button class="time-btn">19:00</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- БЛОК С ИТОГОМ И КНОПКОЙ -->
+      <div class="action-area">
+        <div class="summary">
+          <span class="summary-label">Выбрано:</span>
+          <span class="summary-value">12:00, 5 июня</span>
+        </div>
+        <button class="next-btn">Далее</button>
+      </div>
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <img src="./images/Group 1.svg" alt="STEEL Logo" class="logo-img">
+          </div>
+          
+          <div class="footer-col">
+            <h3>КОНТАКТЫ</h3>
+            <a href="#">+7-(980)-657-57-67</a>
+            <a href="#">Пн-Вс: 10:00–22:00</a>
+          </div>
+          
+          <div class="footer-col">
+            <h3>РАЗДЕЛЫ</h3>
+            <div class="links-row">
+              <div class="links-inner">
+                <a href="#">«Услуги»</a>
+                <a href="#">«Мастера»</a>
+              </div>
+              <div class="links-inner">
+                <a href="#">«Отзывы»</a>
+                <a href="#">«Контакты»</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="footer-col">
+            <h3>МЫ В СЕТЯХ</h3>
+            <a href="#">VK barber</a>
+            <a href="#">Instagram barber</a>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <span>© 2024 STEEL. Все права защищены</span>
+          <a href="#">Политика конфиденциальности</a>
+        </div>
+      </div>
+    </footer>
+    
+  </div>
+</body>
 </html>
