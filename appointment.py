@@ -1,4 +1,4 @@
-# --- ЗАДАНИЕ 1: Создаем класс Appointment ---
+# --- Класс записи (Appointment) ---
 class Appointment:
     def __init__(self, appointment_id, client_name, master_id, service_id, time):
         self.id = appointment_id
@@ -7,7 +7,8 @@ class Appointment:
         self.service_id = service_id
         self.time = time
 
-# Имитация базы данных (заглушки для мастеров и услуг, чтобы код работал)
+
+# --- Заглушки для мастеров и услуг (чтобы код работал автономно) ---
 class Master:
     def __init__(self, master_id):
         self.master_id = master_id
@@ -17,36 +18,38 @@ class Service:
         self.service_id = service_id
 
 def get_master(master_id):
-    # Для теста всегда возвращаем мастера с нужным ID
+    # Имитация получения мастера из базы
     return Master(master_id)
 
 def get_service(service_id):
-    # Для теста всегда возвращаем услугу с нужным ID
+    # Имитация получения услуги из базы
     return Service(service_id)
 
+
+# --- Список для хранения всех записей ---
 appointments = []
 
-# --- Функция создания записи с проверками (Задание 1 + Задание 2) ---
+
+# --- Функция создания записи ---
 def create_appointment(client_name: str, master_id: int, service_id: int, time: str) -> Appointment | None:
     master = get_master(master_id)
     service = get_service(service_id)
     
-    # 1. Проверка на существование мастера и услуги
+    # Проверка 1: Существуют ли мастер и услуга
     if master is None or service is None:
         return None
         
-    # 2. Проверка на пустые поля (Задание 1)
+    # Проверка 2: Заполнены ли все поля (Имя и Время не пустые)
     if not client_name or not time:
         return None
 
-    # 3. Проверка рабочего времени (Задание 2)
-    # Разделяем время "10:00" на часы и минуты, берем только часы
+    # Проверка 3: Рабочие часы (с 08:00 до 20:00)
     try:
+        # Берем строку "10:00", разбиваем по ":" и берем первое значение (часы)
         hour = int(time.split(":")[0])
     except (ValueError, IndexError):
         return None # Если время не в формате "ЧЧ:ММ"
 
-    # Салон работает с 08:00 до 20:00
     if hour < 8 or hour >= 20:
         return None
 
@@ -63,22 +66,29 @@ def create_appointment(client_name: str, master_id: int, service_id: int, time: 
     return new_appointment
 
 
+# ==========================================
+# БЛОК ПРОВЕРКИ (КАК В ЗАДАНИИ)
+# ==========================================
+if __name__ == "__main__":
+    
+    # 1. Создаем 2 записи и выводим их
+    first_appointment = create_appointment("Иванова А.А.", 1, 1, '10:00')
+    second_appointment = create_appointment("Петрова А.А.", 1, 1, '11:00')
 
-print("--- Проверка 1: Создание записей ---")
-first_appointment = create_appointment("Иванова А.А.", 1, 1, '10:00')
-second_appointment = create_appointment("Петрова А.А.", 1, 1, '11:00')
+    print("Список записей:")
+    for appointment in appointments:
+        print(appointment.client_name, appointment.time)
 
-print("Список записей:")
-for appointment in appointments:
-    print(appointment.client_name, appointment.time)
+    # Очищаем список, чтобы следующая проверка была чистой (вывела 0)
+    appointments.clear()
 
-print("\n--- Проверка 2: Неполные данные ---")
-# Очищаем список для чистоты эксперимента (как в задании)
-appointments.clear() 
+    # 2. Создать запись, где частично не заполнены поля
+    no_correct_appointment = create_appointment("", 1, 1, '12:00')
+    print(len(appointments)) # Должно вывести 0
 
-no_correct_appointment = create_appointment("", 1, 1, '12:00')
-print("Количество записей после ошибки с пустым именем:", len(appointments)) # Должно быть 0
+    # Очищаем список еще раз
+    appointments.clear()
 
-print("\n--- Проверка 3: Неверное время (вне рабочих часов) ---")
-no_correct_time = create_appointment("Сидорова А.А.", 1, 1, '00:00')
-print("Количество записей после ошибки с 00:00:", len(appointments)) # Должно быть 0
+    # 3. Создать запись с некорректным временем (вне рабочих часов)
+    no_correct_time = create_appointment("Сидорова А.А.", 1, 1, '00:00')
+    print(len(appointments)) # Должно вывести 0
